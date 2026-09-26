@@ -1,0 +1,668 @@
+
+<a_file id="index.html" target="web_code_canvas" language="html" title="OMARSVINTAGE Catalog Application">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMARSVINTAGE | Rare Antiques, Fine Rugs & Vintage Curios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#0A0908',
+              charcoal: '#141210',
+              card: '#1A1815',
+              border: '#2E2A24',
+              accent: '#C5A059',
+              accentHover: '#E5C178',
+              cream: '#F4EFEA',
+              muted: '#A39E93'
+            }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0A0908;
+      color: #F4EFEA;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-serif {
+      font-family: 'Cinzel', serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0A0908;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #2E2A24;
+      border-radius: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #C5A059;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-accent selection:text-brand-black">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-brand-card border-b border-brand-border py-2 px-4 text-center text-xs tracking-widest uppercase text-brand-muted">
+    Worldwide Shipping & Direct Inquiry Catalog • <span class="text-brand-accent font-semibold">OMARSVINTAGE</span>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-brand-black/90 backdrop-blur-md border-b border-brand-border transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- LOGO -->
+        <a href="#" class="flex flex-col group">
+          <span class="font-serif text-2xl sm:text-3xl tracking-[0.25em] font-extrabold text-brand-cream group-hover:text-brand-accent transition-colors duration-300">
+            OMARSVINTAGE
+          </span>
+          <span class="text-[9px] tracking-[0.3em] uppercase text-brand-muted -mt-1 font-sans">
+            Antiques & Fine Rugs
+          </span>
+        </a>
+
+        <!-- DESKTOP NAV -->
+        <nav class="hidden md:flex space-x-8 text-sm tracking-wider uppercase">
+          <button onclick="selectMainCategory('furniture')" id="nav-furniture" class="text-brand-cream hover:text-brand-accent transition-colors py-2 border-b-2 border-transparent">
+            Furniture
+          </button>
+          <button onclick="selectMainCategory('rugs')" id="nav-rugs" class="text-brand-cream hover:text-brand-accent transition-colors py-2 border-b-2 border-transparent">
+            Rugs
+          </button>
+          <button onclick="selectMainCategory('art')" id="nav-art" class="text-brand-cream hover:text-brand-accent transition-colors py-2 border-b-2 border-transparent">
+            Art & Curios
+          </button>
+        </nav>
+
+        <!-- HEADER RIGHT / WHATSAPP BANNER LINK -->
+        <div class="flex items-center space-x-4">
+          <a href="https://wa.me/923008221650?text=Hello%20OMARSVINTAGE,%20I%20would%20like%20to%20inquire%20about%20your%20collection." target="_blank" class="hidden sm:inline-flex items-center space-x-2 bg-brand-card hover:bg-brand-border text-brand-cream px-4 py-2 rounded-full border border-brand-border text-xs uppercase tracking-wider transition-all duration-300">
+            <svg class="w-4 h-4 text-emerald-500 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>Direct WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="relative bg-brand-charcoal border-b border-brand-border py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto text-center relative z-10">
+      <h1 class="font-serif text-3xl sm:text-5xl font-extrabold tracking-wide text-brand-cream mb-3">
+        THE OMARSVINTAGE COLLECTION
+      </h1>
+      <p class="text-brand-muted text-sm sm:text-base max-w-2xl mx-auto font-light">
+        Restored Colonial Furniture, Vintage Persian & Caucasian Weaves, and Curated Fine Art. Inquire directly for private viewings and pricing details.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN CATALOG WRAPPER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+    
+    <!-- CATEGORY & SUBCATEGORY CONTROLS -->
+    <div class="space-y-6 mb-10">
+      
+      <!-- PRIMARY SECTIONS -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pb-4 border-b border-brand-border">
+        <button onclick="selectMainCategory('all')" id="tab-all" class="cat-tab px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest border transition-all duration-300 bg-brand-accent text-brand-black border-brand-accent">
+          All Collections
+        </button>
+        <button onclick="selectMainCategory('furniture')" id="tab-furniture" class="cat-tab px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest border transition-all duration-300 bg-brand-card text-brand-muted border-brand-border hover:border-brand-accent">
+          Furniture
+        </button>
+        <button onclick="selectMainCategory('rugs')" id="tab-rugs" class="cat-tab px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest border transition-all duration-300 bg-brand-card text-brand-muted border-brand-border hover:border-brand-accent">
+          Rugs & Carpets
+        </button>
+        <button onclick="selectMainCategory('art')" id="tab-art" class="cat-tab px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest border transition-all duration-300 bg-brand-card text-brand-muted border-brand-border hover:border-brand-accent">
+          Art & Small Items
+        </button>
+      </div>
+
+      <!-- DYNAMIC FILTER BAR -->
+      <div id="filter-bar" class="bg-brand-card p-4 rounded-xl border border-brand-border space-y-4">
+        
+        <!-- SEARCH & RESET -->
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+          <div class="relative flex-grow w-full">
+            <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="search-input" oninput="applyFilters()" placeholder="Search pieces by origin, wood, weave, size, style..." class="w-full pl-10 pr-4 py-2.5 bg-brand-black border border-brand-border rounded-lg text-sm text-brand-cream placeholder-brand-muted focus:outline-none focus:border-brand-accent transition-colors">
+          </div>
+          <button onclick="resetFilters()" class="w-full sm:w-auto px-4 py-2.5 text-xs uppercase tracking-wider text-brand-muted hover:text-brand-cream border border-brand-border rounded-lg hover:bg-brand-border transition-colors">
+            Reset Filters
+          </button>
+        </div>
+
+        <!-- SUBCATEGORIES CONTAINER -->
+        <div id="subcategory-container" class="flex flex-wrap items-center gap-2 pt-2 border-t border-brand-border/50 text-xs">
+          <!-- Dynamically inserted subcategory pills -->
+        </div>
+
+        <!-- RUG SIZE FILTER BAR (Visible when Rugs or All is active) -->
+        <div id="rug-size-bar" class="pt-2 border-t border-brand-border/50 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-xs">
+          <span class="text-brand-muted font-semibold tracking-wider uppercase min-w-[90px]">Rug Sizes:</span>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="setRugSizeFilter('all')" id="size-all" class="size-btn px-3 py-1 rounded bg-brand-accent text-brand-black font-semibold transition-all">All Sizes</button>
+            <button onclick="setRugSizeFilter('xlarge')" id="size-xlarge" class="size-btn px-3 py-1 rounded bg-brand-black text-brand-muted border border-brand-border hover:border-brand-accent transition-all">Extra Large (&gt;10x13ft)</button>
+            <button onclick="setRugSizeFilter('large')" id="size-large" class="size-btn px-3 py-1 rounded bg-brand-black text-brand-muted border border-brand-border hover:border-brand-accent transition-all">Large (~10x13ft)</button>
+            <button onclick="setRugSizeFilter('lounge')" id="size-lounge" class="size-btn px-3 py-1 rounded bg-brand-black text-brand-muted border border-brand-border hover:border-brand-accent transition-all">Lounge (6x9ft)</button>
+            <button onclick="setRugSizeFilter('smlounge')" id="size-smlounge" class="size-btn px-3 py-1 rounded bg-brand-black text-brand-muted border border-brand-border hover:border-brand-accent transition-all">Sm Lounge (5x8ft to 4x6ft)</button>
+            <button onclick="setRugSizeFilter('accent')" id="size-accent" class="size-btn px-3 py-1 rounded bg-brand-black text-brand-muted border border-brand-border hover:border-brand-accent transition-all">Accent (3x5ft or smaller)</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ITEM COUNT & STATUS -->
+    <div class="flex items-center justify-between mb-6 text-xs text-brand-muted uppercase tracking-widest">
+      <span id="item-count">Showing 0 Items</span>
+      <span class="text-brand-accent">Price Available Upon Request</span>
+    </div>
+
+    <!-- CATALOG GRID -->
+    <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Items dynamically populated by JS -->
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div id="empty-state" class="hidden text-center py-20 border border-dashed border-brand-border rounded-2xl">
+      <p class="font-serif text-xl text-brand-cream mb-2">No Matching Items Found</p>
+      <p class="text-brand-muted text-sm mb-4">Try clearing your search query or selecting a different subcategory.</p>
+      <button onclick="resetFilters()" class="px-6 py-2 bg-brand-accent text-brand-black text-xs uppercase tracking-wider font-semibold rounded-md hover:bg-brand-accentHover transition-colors">
+        Reset All Filters
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-charcoal border-t border-brand-border py-12 px-4 sm:px-6 lg:px-8 mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      <div>
+        <span class="font-serif text-xl tracking-[0.2em] font-bold text-brand-cream block mb-1">OMARSVINTAGE</span>
+        <p class="text-xs text-brand-muted">Private Gallery & Fine Antiques Merchant</p>
+      </div>
+      <div class="text-xs text-brand-muted space-y-1">
+        <p>Direct Inquiries & WhatsApp Sales</p>
+        <p>© 2026 OMARSVINTAGE. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PRICE INQUIRY MODAL -->
+  <div id="inquiry-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-brand-card border border-brand-border rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
+      
+      <!-- CLOSE BUTTON -->
+      <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-brand-muted hover:text-brand-cream transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- MODAL HEADER -->
+      <div class="border-b border-brand-border pb-4 mb-4">
+        <span class="text-[10px] tracking-widest text-brand-accent uppercase block font-semibold mb-1">Price & Availability Inquiry</span>
+        <h3 id="modal-item-title" class="font-serif text-xl text-brand-cream font-bold">Item Title Here</h3>
+        <p id="modal-item-subtitle" class="text-xs text-brand-muted mt-1">Ref Code: <span id="modal-item-ref" class="text-brand-cream font-mono">#000</span></p>
+      </div>
+
+      <!-- MODAL ITEM SUMMARY -->
+      <div class="flex gap-4 mb-6 bg-brand-black p-3 rounded-lg border border-brand-border">
+        <img id="modal-item-img" src="" alt="" class="w-20 h-20 object-cover rounded border border-brand-border">
+        <div class="text-xs space-y-1 my-auto">
+          <p class="text-brand-muted">Category: <span id="modal-item-cat" class="text-brand-cream capitalize"></span></p>
+          <p class="text-brand-muted">Dimensions / Size: <span id="modal-item-size" class="text-brand-cream"></span></p>
+          <p class="text-brand-accent text-[11px] font-medium pt-1">Direct contact with showroom manager</p>
+        </div>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="space-y-3">
+        <a id="modal-whatsapp-link" href="#" target="_blank" class="w-full flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors shadow-lg">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.882-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          <span>Inquire via WhatsApp</span>
+        </a>
+
+        <a id="modal-email-link" href="#" class="w-full flex items-center justify-center space-x-2 bg-brand-black hover:bg-brand-border text-brand-cream border border-brand-border font-semibold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors">
+          <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span>Inquire via Email</span>
+        </a>
+      </div>
+
+      <p class="text-[10px] text-center text-brand-muted mt-4">We respond to price inquiries within a few hours.</p>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    // INVENTORY DATASET
+    const catalogData = [
+      // 1. FURNITURE - COLONIAL
+      {
+        id: 'OV-F101',
+        title: "150-Year High-Victorian Anglo-Indian Planter's Chair",
+        category: 'furniture',
+        subcategory: 'colonial',
+        rugSizeCategory: null,
+        dimensions: '34" W x 38" D x 42" H (Extends to 62" D)',
+        description: 'Constructed from solid black rosewood with a 4-way adjustable reclining back and original spring deck. Features authentic hand-woven six-way cane seat.',
+        image: 'https://images.unsplash.com/photo-1580481072645-022f9a6d83d0?auto=format&fit=crop&w=800&q=80',
+        badge: 'Anglo-Indian Colonial'
+      },
+      {
+        id: 'OV-F102',
+        title: 'British Colonial Teak & Cane plantation Armchair',
+        category: 'furniture',
+        subcategory: 'colonial',
+        rugSizeCategory: null,
+        dimensions: '28" W x 32" D x 36" H',
+        description: 'Restored late 19th-century Burma teak armchair featuring deep satin finish, scrollwork arms, and fine hand-woven cane work.',
+        image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80',
+        badge: 'Restored Colonial'
+      },
+
+      // 1. FURNITURE - MID CENTURY
+      {
+        id: 'OV-F201',
+        title: 'Mid-Century Teak & Cane Executive Desk',
+        category: 'furniture',
+        subcategory: 'midcentury',
+        rugSizeCategory: null,
+        dimensions: '60" L x 30" W x 29" H',
+        description: '1960s Mid-Century Modern solid teak desk featuring floating top, cane privacy panel, and solid brass drawer hardware.',
+        image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80',
+        badge: 'Mid-Century Modern'
+      },
+      {
+        id: 'OV-F202',
+        title: 'Mid-Century Two-Tier Crescent Teak Corner Table',
+        category: 'furniture',
+        subcategory: 'midcentury',
+        rugSizeCategory: null,
+        dimensions: '30" W x 30" D x 28" H',
+        description: 'Architectural MCM side table crafted in teak with a crescent-swept upper tier and sculpted tapered legs.',
+        image: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&w=800&q=80',
+        badge: 'Mid-Century Modern'
+      },
+
+      // 1. FURNITURE - AFTER MID CENTURY
+      {
+        id: 'OV-F301',
+        title: 'Post-Modern Minimalist Solid Oak Credenza',
+        category: 'furniture',
+        subcategory: 'after-midcentury',
+        rugSizeCategory: null,
+        dimensions: '72" L x 20" W x 32" H',
+        description: 'Late 1970s Post-Modern sideboard with flush handle detailing, warm satin honey finish, and soft-close cabinet joinery.',
+        image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&q=80',
+        badge: 'Late 20th Century'
+      },
+
+      // 2. RUGS - VINTAGE
+      {
+        id: 'OV-R101',
+        title: 'Antique Double-Wefted Heriz Grand Carpet',
+        category: 'rugs',
+        subcategory: 'vintage-rugs',
+        rugSizeCategory: 'xlarge',
+        dimensions: '11ft 8in x 15ft 2in',
+        description: 'Hand-knotted double-wefted Heriz carpet with rich madder root reds, indigo blue geometric medallion, and heavy pure wool pile.',
+        image: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=800&q=80',
+        badge: 'Vintage Persian Heriz'
+      },
+      {
+        id: 'OV-R102',
+        title: 'Vintage Yazd Carpet in Kashan Pattern',
+        category: 'rugs',
+        subcategory: 'vintage-rugs',
+        rugSizeCategory: 'large',
+        dimensions: '10ft 2in x 13ft 1in',
+        description: 'Fine Persian Yazd carpet featuring natural off-white cotton warps and rich floral field dyed with vegetable pigments.',
+        image: 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?auto=format&fit=crop&w=800&q=80',
+        badge: 'Vintage Persian Yazd'
+      },
+      {
+        id: 'OV-R103',
+        title: 'Caucasian Kazak Geometric Lounge Rug',
+        category: 'rugs',
+        subcategory: 'vintage-rugs',
+        rugSizeCategory: 'lounge',
+        dimensions: '6ft 3in x 8ft 11in',
+        description: 'Mid-20th century Caucasian Kazak wool rug featuring high-contrast tribal medallions and vibrant natural dye palette.',
+        image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80',
+        badge: 'Vintage Caucasian'
+      },
+      {
+        id: 'OV-R104',
+        title: 'Shiraz Hand-Knotted Tribal Rug',
+        category: 'rugs',
+        subcategory: 'vintage-rugs',
+        rugSizeCategory: 'smlounge',
+        dimensions: '4ft 8in x 6ft 5in',
+        description: 'Nomadic Persian Shiraz rug woven with soft hand-spun wool, featuring bird motifs and deep terracotta hues.',
+        image: 'https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=80',
+        badge: 'Vintage Shiraz'
+      },
+
+      // 2. RUGS - NEW
+      {
+        id: 'OV-R201',
+        title: 'Hand-Knotted Contemporary Oushak Accent Rug',
+        category: 'rugs',
+        subcategory: 'new-rugs',
+        rugSizeCategory: 'accent',
+        dimensions: '3ft 1in x 4ft 10in',
+        description: 'Modern hand-knotted Oushak-style rug crafted with hand-spun Ghazni wool and muted pastel vegetable dyes.',
+        image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80',
+        badge: 'New Oushak Weave'
+      },
+
+      // 3. ART & SMALL ITEMS
+      {
+        id: 'OV-A101',
+        title: 'Restored Early 20th Century Brass Maritime Compass',
+        category: 'art',
+        subcategory: 'small-items',
+        rugSizeCategory: null,
+        dimensions: '8" Diameter x 5" Height',
+        description: 'Heavy solid brass gimbals compass from a British trade vessel, fully restored with polished casing and original card dial.',
+        image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
+        badge: 'Nautical Curio'
+      },
+      {
+        id: 'OV-A102',
+        title: '19th Century Hand-Carved Wooden Trade Figurine',
+        category: 'art',
+        subcategory: 'art-curios',
+        rugSizeCategory: null,
+        dimensions: '14" Height x 5" Base',
+        description: 'Polychrome hand-carved teak decorative figurine depicting classical regional merchant attire with natural patina.',
+        image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+        badge: 'Antique Folk Art'
+      }
+    ];
+
+    // APPLICATION STATE
+    let currentMainCategory = 'all';
+    let currentSubcategory = 'all';
+    let currentRugSize = 'all';
+
+    // DOM ELEMENTS
+    const gridEl = document.getElementById('catalog-grid');
+    const emptyEl = document.getElementById('empty-state');
+    const itemCountEl = document.getElementById('item-count');
+    const subcategoryContainer = document.getElementById('subcategory-container');
+    const rugSizeBar = document.getElementById('rug-size-bar');
+    const searchInput = document.getElementById('search-input');
+
+    // INITIALIZE
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSubcategoryPills();
+      applyFilters();
+    });
+
+    // MAIN CATEGORY SELECTION
+    function selectMainCategory(cat) {
+      currentMainCategory = cat;
+      currentSubcategory = 'all';
+      currentRugSize = 'all';
+
+      // Update Tab Styles
+      document.querySelectorAll('.cat-tab').forEach(btn => {
+        btn.classList.remove('bg-brand-accent', 'text-brand-black', 'border-brand-accent');
+        btn.classList.add('bg-brand-card', 'text-brand-muted', 'border-brand-border');
+      });
+
+      const activeTab = document.getElementById(`tab-${cat}`);
+      if(activeTab) {
+        activeTab.classList.remove('bg-brand-card', 'text-brand-muted', 'border-brand-border');
+        activeTab.classList.add('bg-brand-accent', 'text-brand-black', 'border-brand-accent');
+      }
+
+      renderSubcategoryPills();
+      applyFilters();
+    }
+
+    // SUBCATEGORY PILLS RENDERER
+    function renderSubcategoryPills() {
+      let options = [];
+
+      if(currentMainCategory === 'all') {
+        options = [
+          { id: 'all', label: 'All Subcategories' },
+          { id: 'colonial', label: 'Colonial Furniture' },
+          { id: 'midcentury', label: 'Mid-Century Furniture' },
+          { id: 'after-midcentury', label: 'Post Mid-Century' },
+          { id: 'vintage-rugs', label: 'Vintage Rugs' },
+          { id: 'new-rugs', label: 'New Rugs' },
+          { id: 'art-curios', label: 'Art & Collectibles' },
+          { id: 'small-items', label: 'Small Objects & Curios' }
+        ];
+      } else if(currentMainCategory === 'furniture') {
+        options = [
+          { id: 'all', label: 'All Furniture' },
+          { id: 'colonial', label: 'Colonial Period' },
+          { id: 'midcentury', label: 'Mid-Century Period' },
+          { id: 'after-midcentury', label: 'After Mid-Century Period' }
+        ];
+      } else if(currentMainCategory === 'rugs') {
+        options = [
+          { id: 'all', label: 'All Rugs' },
+          { id: 'vintage-rugs', label: 'Vintage Rugs' },
+          { id: 'new-rugs', label: 'New Rugs' }
+        ];
+      } else if(currentMainCategory === 'art') {
+        options = [
+          { id: 'all', label: 'All Art & Curios' },
+          { id: 'art-curios', label: 'Fine Art & Sculptures' },
+          { id: 'small-items', label: 'Small Items & Collectibles' }
+        ];
+      }
+
+      // Show or Hide Rug Size Bar
+      if(currentMainCategory === 'rugs' || currentMainCategory === 'all') {
+        rugSizeBar.classList.remove('hidden');
+      } else {
+        rugSizeBar.classList.add('hidden');
+      }
+
+      subcategoryContainer.innerHTML = options.map(opt => `
+        <button 
+          onclick="setSubcategory('${opt.id}')"
+          class="subcat-btn px-3 py-1 rounded-full border transition-all ${currentSubcategory === opt.id ? 'bg-brand-cream text-brand-black border-brand-cream font-medium' : 'bg-brand-black text-brand-muted border-brand-border hover:border-brand-accent'}"
+        >
+          ${opt.label}
+        </button>
+      `).join('');
+    }
+
+    function setSubcategory(sub) {
+      currentSubcategory = sub;
+      renderSubcategoryPills();
+      applyFilters();
+    }
+
+    function setRugSizeFilter(size) {
+      currentRugSize = size;
+
+      // Update Size Button Styles
+      document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-accent', 'text-brand-black', 'font-semibold');
+        btn.classList.add('bg-brand-black', 'text-brand-muted', 'border', 'border-brand-border');
+      });
+
+      const activeSizeBtn = document.getElementById(`size-${size}`);
+      if(activeSizeBtn) {
+        activeSizeBtn.classList.remove('bg-brand-black', 'text-brand-muted', 'border', 'border-brand-border');
+        activeSizeBtn.classList.add('bg-brand-accent', 'text-brand-black', 'font-semibold');
+      }
+
+      applyFilters();
+    }
+
+    // MAIN FILTER ENGINE
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase().trim();
+
+      const filtered = catalogData.filter(item => {
+        // Main Category Match
+        if(currentMainCategory !== 'all' && item.category !== currentMainCategory) return false;
+
+        // Subcategory Match
+        if(currentSubcategory !== 'all' && item.subcategory !== currentSubcategory) return false;
+
+        // Rug Size Match
+        if(currentRugSize !== 'all') {
+          if(item.category !== 'rugs') return false;
+          if(item.rugSizeCategory !== currentRugSize) return false;
+        }
+
+        // Search Query Match
+        if(query) {
+          const matchTitle = item.title.toLowerCase().includes(query);
+          const matchDesc = item.description.toLowerCase().includes(query);
+          const matchDim = item.dimensions.toLowerCase().includes(query);
+          const matchBadge = item.badge.toLowerCase().includes(query);
+          const matchId = item.id.toLowerCase().includes(query);
+          if(!matchTitle && !matchDesc && !matchDim && !matchBadge && !matchId) return false;
+        }
+
+        return true;
+      });
+
+      renderGrid(filtered);
+    }
+
+    function resetFilters() {
+      searchInput.value = '';
+      currentMainCategory = 'all';
+      currentSubcategory = 'all';
+      currentRugSize = 'all';
+
+      selectMainCategory('all');
+      setRugSizeFilter('all');
+    }
+
+    // RENDER CATALOG GRID
+    function renderGrid(items) {
+      itemCountEl.textContent = `Showing ${items.length} ${items.length === 1 ? 'Piece' : 'Pieces'}`;
+
+      if(items.length === 0) {
+        gridEl.innerHTML = '';
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      emptyEl.classList.add('hidden');
+
+      gridEl.innerHTML = items.map(item => `
+        <div class="bg-brand-card border border-brand-border rounded-xl overflow-hidden hover:border-brand-accent/60 transition-all duration-300 flex flex-col group">
+          
+          <!-- IMAGE & BADGE -->
+          <div class="relative h-64 overflow-hidden bg-brand-black">
+            <img 
+              src="${item.image}" 
+              alt="${item.title}" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+              loading="lazy"
+            >
+            <span class="absolute top-3 left-3 bg-brand-black/80 backdrop-blur-md text-brand-accent text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded border border-brand-accent/30">
+              ${item.badge}
+            </span>
+            <span class="absolute bottom-3 right-3 bg-brand-card/90 text-brand-muted text-[10px] font-mono px-2 py-0.5 rounded border border-brand-border">
+              ${item.id}
+            </span>
+          </div>
+
+          <!-- CONTENT -->
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-lg font-bold text-brand-cream group-hover:text-brand-accent transition-colors line-clamp-2 mb-2">
+                ${item.title}
+              </h3>
+              
+              <div class="text-xs text-brand-muted mb-3 space-y-1">
+                <p><strong class="text-brand-cream font-medium">Dimensions:</strong> ${item.dimensions}</p>
+              </div>
+
+              <p class="text-xs text-brand-muted/90 line-clamp-3 font-light mb-4">
+                ${item.description}
+              </p>
+            </div>
+
+            <!-- INQUIRE BUTTON (REPLACES PRICE) -->
+            <div class="pt-4 border-t border-brand-border/60 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase tracking-widest text-brand-muted block">Price</span>
+                <span class="text-xs text-brand-accent font-semibold tracking-wider uppercase">Upon Inquiry</span>
+              </div>
+              <button 
+                onclick="openInquiryModal('${item.id}')"
+                class="bg-brand-black hover:bg-brand-accent text-brand-cream hover:text-brand-black border border-brand-border hover:border-brand-accent px-4 py-2 rounded-lg text-xs uppercase tracking-wider font-semibold transition-all duration-300 shadow"
+              >
+                Inquire Price
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      `).join('');
+    }
+
+    // MODAL LOGIC
+    function openInquiryModal(itemId) {
+      const item = catalogData.find(i => i.id === itemId);
+      if(!item) return;
+
+      document.getElementById('modal-item-title').textContent = item.title;
+      document.getElementById('modal-item-ref').textContent = item.id;
+      document.getElementById('modal-item-cat').textContent = `${item.category} (${item.subcategory})`;
+      document.getElementById('modal-item-size').textContent = item.dimensions;
+      document.getElementById('modal-item-img').src = item.image;
+
+      // Construct WhatsApp & Email Message
+      const message = `Hello OMARSVINTAGE, I would like to inquire about the price and availability of: "${item.title}" (Ref: ${item.id}).`;
+      const encodedMsg = encodeURIComponent(message);
+
+      document.getElementById('modal-whatsapp-link').href = `https://wa.me/923008221650?text=${encodedMsg}`;
+      document.getElementById('modal-email-link').href = `mailto:omarsvintage@gmail.com?subject=Price Inquiry: ${item.id}&body=${encodedMsg}`;
+
+      document.getElementById('inquiry-modal').classList.remove('hidden');
+    }
+
+    function closeInquiryModal() {
+      document.getElementById('inquiry-modal').classList.add('hidden');
+    }
+
+    // Close Modal on Background Click
+    document.getElementById('inquiry-modal').addEventListener('click', (e) => {
+      if(e.target === document.getElementById('inquiry-modal')) {
+        closeInquiryModal();
+      }
+    });
+  </script>
+</body>
+</html>
+</a_file>
