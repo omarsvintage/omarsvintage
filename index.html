@@ -159,25 +159,27 @@
 
     <!-- ADMIN MODAL -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-brand-card border border-brand-border rounded-lg max-w-xl w-full p-6 relative">
+        <div class="bg-brand-card border border-brand-border rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar p-6 relative">
             <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-brand-muted hover:text-brand-cream p-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
             <div id="adminLoginView">
                 <h3 class="font-serif text-2xl text-brand-cream mb-4">Admin Authentication</h3>
-                <p class="text-xs text-brand-muted mb-4">Enter administrative passcode to manage inventory.</p>
-                <input type="password" id="adminPassInput" placeholder="Passcode (Default: 1234)" class="w-full bg-brand-charcoal border border-brand-border rounded p-3 text-sm text-brand-cream mb-4 focus:outline-none focus:border-brand-accent">
+                <p class="text-xs text-brand-muted mb-4">Enter your administrative passcode to access management tools.</p>
+                <input type="password" id="adminPassInput" placeholder="Enter Admin Passcode" class="w-full bg-brand-charcoal border border-brand-border rounded p-3 text-sm text-brand-cream mb-4 focus:outline-none focus:border-brand-accent">
                 <button onclick="authenticateAdmin()" class="w-full py-3 bg-brand-accent text-brand-black rounded text-xs font-semibold uppercase tracking-wider hover:bg-brand-accentHover">Access Dashboard</button>
             </div>
 
             <div id="adminDashboardView" class="hidden">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-serif text-2xl text-brand-cream">Add New Inventory</h3>
+                    <h3 class="font-serif text-2xl text-brand-cream">Inventory Manager</h3>
                     <button onclick="logoutAdmin()" class="text-xs text-red-400 hover:underline">Exit Admin</button>
                 </div>
                 
-                <form id="addItemForm" onsubmit="handleAddItem(event)" class="space-y-4">
+                <!-- ADD ITEM FORM -->
+                <form id="addItemForm" onsubmit="handleAddItem(event)" class="space-y-4 mb-8 border-b border-brand-border pb-8">
+                    <h4 class="text-xs font-semibold text-brand-accent uppercase tracking-wider mb-2">Add New Piece</h4>
                     <div>
                         <label class="block text-xs text-brand-muted mb-1">Title / Name</label>
                         <input type="text" id="itemTitle" required class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-sm text-brand-cream">
@@ -192,14 +194,14 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs text-brand-muted mb-1">Price (or "Inquire")</label>
-                            <input type="text" id="itemPrice" placeholder="e.g. PKR 185,000" required class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-sm text-brand-cream">
+                            <label class="block text-xs text-brand-muted mb-1">Price</label>
+                            <input type="text" id="itemPrice" placeholder="e.g. PKR 185,000 or Inquire" required class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-sm text-brand-cream">
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs text-brand-muted mb-1">Material / Wood / Foundation</label>
-                            <input type="text" id="itemMaterial" placeholder="e.g. Solid Teak or Wool on Cotton" required class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-sm text-brand-cream">
+                            <input type="text" id="itemMaterial" placeholder="e.g. Solid Teak" required class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-sm text-brand-cream">
                         </div>
                         <div>
                             <label class="block text-xs text-brand-muted mb-1">Dimensions</label>
@@ -209,15 +211,23 @@
                     <div>
                         <label class="block text-xs text-brand-muted mb-1">Photo Upload (or URL)</label>
                         <input type="file" id="itemImageFile" accept="image/*" class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-xs text-brand-cream">
-                        <p class="text-[10px] text-brand-muted mt-1">Or paste direct image URL:</p>
+                        <p class="text-[10px] text-brand-muted mt-1">Or paste direct web image link:</p>
                         <input type="url" id="itemImageUrl" placeholder="https://..." class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-sm text-brand-cream mt-1">
                     </div>
                     <div>
                         <label class="block text-xs text-brand-muted mb-1">Description</label>
                         <textarea id="itemDescription" rows="3" required class="w-full bg-brand-charcoal border border-brand-border rounded p-2 text-sm text-brand-cream"></textarea>
                     </div>
-                    <button type="submit" class="w-full py-3 bg-brand-accent text-brand-black rounded text-xs font-semibold uppercase tracking-wider hover:bg-brand-accentHover">Save to Collection</button>
+                    <button type="submit" class="w-full py-3 bg-brand-accent text-brand-black rounded text-xs font-semibold uppercase tracking-wider hover:bg-brand-accentHover">Add to Collection</button>
                 </form>
+
+                <!-- EXISTING INVENTORY LIST WITH DELETE BUTTONS -->
+                <div>
+                    <h4 class="text-xs font-semibold text-brand-accent uppercase tracking-wider mb-4">Manage Current Catalog</h4>
+                    <div id="adminInventoryList" class="space-y-3">
+                        <!-- Dynamic list populated via JS -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -225,6 +235,7 @@
     <!-- JAVASCRIPT APPLICATION -->
     <script>
         const PHONE_NUMBER = "923008243272";
+        const ADMIN_PASSCODE = "1234"; // CHANGE THIS PASSCODE TO YOUR PREFERRED CODE
 
         const DEFAULT_INVENTORY = [
             {
@@ -264,6 +275,7 @@
 
         let inventory = JSON.parse(localStorage.getItem('omarsvintage_inventory')) || DEFAULT_INVENTORY;
         let activeCategory = 'all';
+        let isAdminLoggedIn = false;
 
         function renderCatalog() {
             const grid = document.getElementById('catalogGrid');
@@ -307,6 +319,35 @@
                                 View Details
                             </button>
                         </div>
+                    </div>
+                </div>
+            `).join('');
+
+            renderAdminInventoryList();
+        }
+
+        function renderAdminInventoryList() {
+            const adminList = document.getElementById('adminInventoryList');
+            if (!adminList) return;
+
+            adminList.innerHTML = inventory.map(item => `
+                <div class="flex items-center justify-between p-3 bg-brand-charcoal border border-brand-border rounded text-xs">
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" class="w-10 h-10 object-cover rounded">
+                        <div>
+                            <div class="font-bold text-brand-cream">${item.title}</div>
+                            <div class="text-[10px] text-brand-muted">${item.category} • ${item.price}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <select onchange="changeStatus('${item.id}', this.value)" class="bg-brand-black border border-brand-border text-[10px] text-brand-cream p-1 rounded">
+                            <option value="Available" ${item.status === 'Available' ? 'selected' : ''}>Available</option>
+                            <option value="Reserved" ${item.status === 'Reserved' ? 'selected' : ''}>Reserved</option>
+                            <option value="Sold" ${item.status === 'Sold' ? 'selected' : ''}>Sold</option>
+                        </select>
+                        <button onclick="deleteItem('${item.id}')" class="px-2 py-1 bg-red-900/40 text-red-300 border border-red-800 rounded text-[10px] hover:bg-red-800 transition-all">
+                            Delete
+                        </button>
                     </div>
                 </div>
             `).join('');
@@ -356,9 +397,16 @@
                             </div>
                         </div>
 
-                        <a href="https://wa.me/${PHONE_NUMBER}?text=${encodedText}" target="_blank" class="w-full py-3 bg-brand-accent text-brand-black rounded text-xs font-semibold uppercase tracking-wider hover:bg-brand-accentHover text-center transition-all flex items-center justify-center gap-2">
-                            <span>Inquire on WhatsApp</span>
-                        </a>
+                        <div>
+                            <a href="https://wa.me/${PHONE_NUMBER}?text=${encodedText}" target="_blank" class="w-full py-3 bg-brand-accent text-brand-black rounded text-xs font-semibold uppercase tracking-wider hover:bg-brand-accentHover text-center transition-all flex items-center justify-center gap-2 mb-2">
+                                <span>Inquire on WhatsApp</span>
+                            </a>
+                            ${isAdminLoggedIn ? `
+                                <button onclick="deleteItem('${item.id}')" class="w-full py-2 bg-red-950/60 text-red-400 border border-red-800 rounded text-xs hover:bg-red-900 transition-all mt-2">
+                                    🗑️ Delete This Piece
+                                </button>
+                            ` : ''}
+                        </div>
                     </div>
                 </div>
             `;
@@ -379,19 +427,40 @@
 
         function authenticateAdmin() {
             const pass = document.getElementById('adminPassInput').value;
-            if (pass === '23369') {
+            if (pass === ADMIN_PASSCODE) {
+                isAdminLoggedIn = true;
                 document.getElementById('adminLoginView').classList.add('hidden');
                 document.getElementById('adminDashboardView').classList.remove('hidden');
+                renderAdminInventoryList();
             } else {
                 alert('Invalid Passcode');
             }
         }
 
         function logoutAdmin() {
+            isAdminLoggedIn = false;
             document.getElementById('adminLoginView').classList.remove('hidden');
             document.getElementById('adminDashboardView').classList.add('hidden');
             document.getElementById('adminPassInput').value = '';
             closeAdminModal();
+        }
+
+        function changeStatus(id, newStatus) {
+            const item = inventory.find(i => i.id === id);
+            if (item) {
+                item.status = newStatus;
+                localStorage.setItem('omarsvintage_inventory', JSON.stringify(inventory));
+                renderCatalog();
+            }
+        }
+
+        function deleteItem(id) {
+            if (confirm("Are you sure you want to delete this piece from your catalog?")) {
+                inventory = inventory.filter(item => item.id !== id);
+                localStorage.setItem('omarsvintage_inventory', JSON.stringify(inventory));
+                renderCatalog();
+                closeDetailModal();
+            }
         }
 
         function handleAddItem(e) {
